@@ -34,6 +34,10 @@ public class Main {
 //        myClass2.function9();
 //        myClass2.function10();
 //        myClass2.function11();
-        myClass2.function12();
+//        myClass2.function12();
+//        myClass2.function13();
+//        myClass2.function14();
+//        myClass2.function15();
+//        myClass2.function16(); // in progress
     }
 }

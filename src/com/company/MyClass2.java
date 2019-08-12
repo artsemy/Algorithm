@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
-public class MyClass2 {
+class MyClass2 {
 
     private int[][] matrixInt;
     private double[][] matrixDouble;
@@ -216,19 +216,27 @@ public class MyClass2 {
 
     void function12(){
         initDefaultMatrix();
+        superFunction(false);
+    }
+
+    private void superFunction(boolean b){
         printIntMatrix();
-        for (int i = 0; i < matrixInt.length; i++) {
-            Arrays.sort(matrixInt[i]);
+        if(b){ transpose(); }
+        for (int[] ints : matrixInt) {
+            Arrays.sort(ints);
         }
+        if(b){ transpose(); }
         printIntMatrix();
         for (int i = 0; i < matrixInt.length; i++) {
             for (int j = 0; j < matrixInt[0].length; j++) {
                 matrixInt[i][j] *= -1;
             }
         }
-        for (int i = 0; i < matrixInt.length; i++) {
-            Arrays.sort(matrixInt[i]);
+        if(b){ transpose(); }
+        for (int[] ints : matrixInt) {
+            Arrays.sort(ints);
         }
+        if(b){ transpose(); }
         for (int i = 0; i < matrixInt.length; i++) {
             for (int j = 0; j < matrixInt[0].length; j++) {
                 matrixInt[i][j] *= -1;
@@ -237,4 +245,68 @@ public class MyClass2 {
         printIntMatrix();
     }
 
+    private void transpose(){
+        int[][] mass2 = new int[matrixInt.length][matrixInt[0].length];
+        for(int i = 0; i < mass2.length; ++i){
+            for(int j = 0; j < mass2[0].length; j++){
+                mass2[i][j] = matrixInt[j][i];
+            }
+        }
+        matrixInt = mass2;
+    }
+
+    void function13(){
+        initDefaultMatrix();
+        superFunction(true);
+    }
+
+    void function14(){
+        int m = 7;
+        int n = 5;
+        matrixInt = new int[m][n];
+        Random r = new Random();
+        for (int i = 0; i < n; i++){
+            int count = i+1;
+            while(count > 0){
+                int k = r.nextInt(m);
+                if(matrixInt[k][i] != 1){
+                    matrixInt[k][i] = 1;
+                    count--;
+                }
+            }
+        }
+        printIntMatrix();
+    }
+
+    void function15(){
+        initDefaultMatrix();
+        printIntMatrix();
+        int max = findMaxElement();
+        for(int i = 0; i < matrixInt.length; i++){
+            for(int j = 0; j < matrixInt[0].length; j++){
+                if((i+j)%2 == 0) {
+                    matrixInt[i][j] = max;
+                }
+            }
+        }
+        printIntMatrix();
+    }
+
+    private int findMaxElement(){
+        int max = matrixInt[0][0];
+        for(int i = 0; i < matrixInt.length; i++){
+            for(int j = 0; j < matrixInt[0].length; j++){
+                if(matrixInt[i][j] > max){
+                    max = matrixInt[i][j];
+                }
+            }
+        }
+        return max;
+    }
+
+    void function16(){
+        int n = 3;
+        int sum = (1+n*n)*n/2;
+        
+    }
 }
