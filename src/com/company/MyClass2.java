@@ -307,6 +307,6 @@ class MyClass2 {
     void function16(){
         int n = 3;
         int sum = (1+n*n)*n/2;
-        
+
     }
 }
