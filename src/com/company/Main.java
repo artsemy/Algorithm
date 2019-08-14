@@ -6,7 +6,8 @@ public class Main {
 //        part1();
 //        part2();
 //        extraPart();
-        part3();
+//        part3();
+
     }
 
 //    static void extraPart(){
@@ -50,10 +51,13 @@ public class Main {
 
     static void part3(){
         MyClass3 myClass3 = new MyClass3();
-//        myClass3.function1(8);
-//        myClass3.function2();
-//        myClass3.function3();
-//        myClass3.function4();
+        myClass3.function1(8);
+        myClass3.function2();
+        myClass3.function3();
+        myClass3.function4();
         myClass3.function5();
+        myClass3.function6();
+        myClass3.function7();
+        myClass3.function8();
     }
 }
