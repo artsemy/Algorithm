@@ -5,15 +5,9 @@ public class Main {
     public static void main(String[] args) {
 //        part1();
 //        part2();
-//        extraPart();
 //        part3();
-
+        part4();
     }
-
-//    static void extraPart(){
-//        superClass aClass = new superClass();
-//        aClass.start();
-//    }
 
     static void part1(){
         MyClass myClass = new MyClass();
@@ -59,5 +53,16 @@ public class Main {
         myClass3.function6();
         myClass3.function7();
         myClass3.function8();
+    }
+
+    static void part4(){
+        MyClass4 myClass4 = new MyClass4();
+//        myClass4.function1b(27,18);
+//        myClass4.function2(32,4,8,16);
+//        myClass4.function3(2);
+//        myClass4.function4();
+//        myClass4.function5();
+//        myClass4.function6(6,3,5);
+        myClass4.function7b();
     }
 }
