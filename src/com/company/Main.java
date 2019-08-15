@@ -6,7 +6,7 @@ public class Main {
 //        part1();
 //        part2();
 //        part3();
-        part4();
+//        part4();
     }
 
     static void part1(){
@@ -57,12 +57,22 @@ public class Main {
 
     static void part4(){
         MyClass4 myClass4 = new MyClass4();
-//        myClass4.function1b(27,18);
-//        myClass4.function2(32,4,8,16);
-//        myClass4.function3(2);
-//        myClass4.function4();
-//        myClass4.function5();
-//        myClass4.function6(6,3,5);
+        myClass4.function1b(27,18);
+        myClass4.function2(32,4,8,16);
+        myClass4.function3(2);
+        myClass4.function4();
+        myClass4.function5();
+        myClass4.function6(6,3,5);
         myClass4.function7b();
+        myClass4.function8b(2,8);
+        myClass4.function9(3,4,3,4);
+        myClass4.function10a(123433659);
+        myClass4.function11(10,9);
+        myClass4.function12(15, 400); //ideas
+        myClass4.function13(100);
+        myClass4.function14(1000);
+        myClass4.function15(2);
+        myClass4.function16(4);
+        myClass4.function17(119);
     }
 }

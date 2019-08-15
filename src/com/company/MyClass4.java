@@ -83,8 +83,9 @@ class MyClass4 {
                 max2 = max1;
                 max1 = array1[i];
             } else {
-                if(array1[i] > max2);
-                max2 = array1[i];
+                if(array1[i] > max2) {
+                    max2 = array1[i];
+                }
             }
         }
         System.out.println("second max " + max2);
@@ -127,5 +128,229 @@ class MyClass4 {
             }
         }
         System.out.println(res);
+    }
+
+    void function8a(int a, int b){
+        int[] array1 = new int[]{1,2,3,4,5,6,7,8,9};
+        int sum = 0;
+        for (int i = a-1; i < b-2; i++) {
+            sum = sum + array1[i] + array1[i+1] + array1[i+2];
+            System.out.print(sum + " ");
+            sum = 0;
+        }
+    }
+
+    void function8b(int a, int b){
+        int[] array1 = new int[]{1,2,3,4,5,6,7,8,9};
+        int sum = array1[a-1] + array1[a] + array1[a+1];
+        System.out.print(sum + " ");
+        for (int i = a; i < b-2; i++) {
+            sum = sum - array1[i-1] + array1[i+2];
+            System.out.print(sum + " ");
+        }
+    }
+
+    void function9(int x, int y, int z, int t){
+        double p = (x+y+z+t)/2.;
+        double n1 = (p-x)*(p-y)*(p-z)*(p-t);
+        double d = Math.sqrt(x*x + y*y);
+        double angle1 = Math.acos((z*z+t*t-d*d)/2./z/t);
+        double angle2 = Math.toRadians(90.);
+        double n2 = x*y*z*t*Math.cos(angle1/2.+angle2/2.);
+        double S1 = Math.sqrt(n1-n2);
+        System.out.println("Area " + S1);
+    }
+
+    void function10a(int n){
+        System.out.println(n);
+        int[] mass;
+        int count = countN(n);
+        mass = new int[count];
+        for (int i = count-1; i >= 0; i--) {
+            mass[i] = n%10;
+            n /= 10;
+        }
+        for (int value : mass) {
+            System.out.print(value + " ");
+        }
+    }
+
+    private int countN(int n){
+        int count = 1;
+        while (Math.pow(10, count) <= n){
+            count++;
+        }
+        return count;
+    }
+
+    void function10b(int n){
+        System.out.println(n);
+        char[] mass = String.valueOf(n).toCharArray();
+        for (char c: mass) {
+            System.out.print(c + " ");
+        }
+    }
+
+    void function11(int a, int b){
+        int n1 = countN(a);
+        int n2 = countN(b);
+        if(n1 > n2){
+            System.out.println(a + " has more digits than " + b);
+        } else if (n2 >n1){
+            System.out.println(b + " has more digits than " + a);
+        } else {
+            System.out.println(a + " and " + b + " has same number of digits");
+        }
+    }
+
+    void function12(int k, int n){
+        //int size = masSize(k, countN(n), n);
+        int[] a = new int[n/k];
+        int index = 0;
+        for (int i = 0; i < n; i++) {
+            if (countSum(i) == k) {
+                a[index++] = i;
+            }
+        }
+        for (int i: a) {
+            System.out.print(i + " ");
+        }
+    }
+
+    private int countSum(int n){
+        int sum = 0;
+        while (n != 0){
+            sum += n%10;
+            n /= 10;
+        }
+        return sum;
+    }
+
+    private int masSize(int k, int len, double max){
+        if(len == 1){
+            return k <= max ? 1 : 0;
+        } else {
+            int count = 0;
+            int q = 10;
+            if (k < q){
+                count += masSize(k, len-1, max);
+            }
+            int i = 1;
+            while (Math.pow(q, len-1)*i < max){
+                count += masSize(k-i, len-1, max-Math.pow(q, len-1)*i);
+                i++;
+            }
+            return count;
+        }
+    }
+
+    void function13(int n){
+        for (int i = n; i < 2*n-1; i++) {
+            if (isPrime(i)){
+                if (isPrime(i+2)){
+                    System.out.println(i + "," + (i+2) + "; ");
+                }
+            }
+        }
+    }
+
+    private boolean isPrime(int n){
+        for (int i = 2; i < n; i++) {
+            if (n%i == 0){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    void function14(int k){
+        for (int i = 1; i < k+1; i++) {
+            if(isArm(i)){
+                System.out.println(i);
+            }
+        }
+    }
+
+    private boolean isArm(int i){
+        int n = countN(i);
+        int sum = 0;
+        int iCopy = i;
+        for (int j = 0; j < n; j++) {
+            int k = iCopy%10;
+            sum += Math.pow(k, n);
+            iCopy /= 10;
+        }
+        return i == sum;
+    }
+
+    void function15(int k){
+        for (int i = (int)Math.pow(10, k-1); i < (int)Math.pow(10, k); i++) {
+            if (isUp(i)){
+                System.out.print(i + ", ");
+            }
+        }
+    }
+
+    private boolean isUp(int i){
+        int k1 = i%10;
+        i /= 10;
+        while (i > 0){
+            if (i%10 >= k1){
+                return false;
+            }
+            k1 = i%10;
+            i /= 10;
+        }
+        return true;
+    }
+
+    void function16(int k){
+        int sum = 0;
+        for (int i = (int)Math.pow(10, k-1); i < (int)Math.pow(10, k); i++) {
+            if (isOdd(i)){
+                sum += i;
+            }
+        }
+        int count = countEven(sum);
+        System.out.println("sum " + sum + ", even " + count);
+    }
+
+    private boolean isOdd(int k){
+        while (k > 0){
+            if(k%10 == 0) {
+                return false;
+            }
+            k /= 10;
+        }
+        return true;
+    }
+
+    private int countEven(int k){
+        int count = 0;
+        while (k > 0){
+            if (k%2 == 0){
+                count++;
+            }
+            k /= 10;
+        }
+        return count;
+    }
+
+    void function17(int n){
+        int count = 0;
+        while (n != 0){
+            n -= countDigit(n);
+            count++;
+        }
+        System.out.println("count " + count);
+    }
+
+    private int countDigit(int n){
+        int sum = 0;
+        while (n != 0){
+            sum += n%10;
+            n /= 10;
+        }
+        return sum;
     }
 }
