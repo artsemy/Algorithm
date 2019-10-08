@@ -1,25 +1,27 @@
 package com.company;
 
 import java.math.BigInteger;
-import java.util.Arrays;
 import java.util.Random;
 
 class MyClass {
 
-    void function1(){
+    //find sum of elements (only that multiple to 'k') from mass
+    void function1(int k){
         int size = 10;
         int sum = 0;
-        int k = 3;
         int[] mass = createRandomIntMass(size);
+        printIntMass(mass);
+        System.out.print("elements multiple to " + k + ": ");
         for (int value : mass) {
             if (value % k == 0) {
+                System.out.print(value + " ");
                 sum += value;
             }
         }
-        printIntMass(mass);
-        System.out.println("sum = " + sum);
+        System.out.println("\nsum = " + sum);
     }
 
+    //create array of integer [0,19]
     private int[] createRandomIntMass(int n){
         int[] mass = new int[n];
         Random random = new Random();
@@ -29,6 +31,7 @@ class MyClass {
         return mass;
     }
 
+    //create array of integer [-10, 9]
     private int[] createRandomIntMass2(int n){
         int[] mass = new int[n];
         Random random = new Random();
@@ -38,6 +41,7 @@ class MyClass {
         return mass;
     }
 
+    //create array of double [-5,5)
     private double[] createRandomDoubleMass(int n){
         double[] mass = new double[n];
         Random random = new Random();
@@ -47,17 +51,27 @@ class MyClass {
         return mass;
     }
 
+    //print int array
     private void printIntMass(int[] mass){
-        System.out.println(Arrays.toString(mass));
-    }
-    private void printDoubleMass(double[] mass){
-        System.out.println(Arrays.toString(mass));
+        for (int i: mass) {
+            System.out.print(i + " ");
+        }
+        System.out.println();
     }
 
-    void function2(){
+    //print double array
+    private void printDoubleMass(double[] mass){
+        for (double i: mass) {
+            System.out.printf("%.2f  ", i);
+        }
+        System.out.println();
+    }
+
+    //replace element that more than 'Z' with 'Z' from array
+    //count replaces
+    void function2(int Z){
         int size = 10;
         int count = 0;
-        int Z = 10;
         int[] mass = createRandomIntMass(size);
         printIntMass(mass);
         for (int i = 0; i <mass.length ; i++) {
@@ -70,6 +84,7 @@ class MyClass {
         System.out.println("count = " + count);
     }
 
+    //count positive, negative and zero elements from double array
     void function3(){
         int size = 10;
         double[] mass = createRandomDoubleMass(size);
@@ -86,9 +101,10 @@ class MyClass {
                 zer++;
             }
         }
-        System.out.println("poz:" + poz + " neg:" + neg + " zer:" + zer);
+        System.out.println("pos:" + poz + " neg:" + neg + " zer:" + zer);
     }
 
+    //replace min and max elements in double array
     void function4(){
         int size = 10;
         double[] mass = createRandomDoubleMass(size);
@@ -107,15 +123,17 @@ class MyClass {
                 minIndex = i;
             }
         }
+        System.out.printf("min= %.2f max= %.2f\n", minElem, maxElem);
         mass[maxIndex] = minElem;
         mass[minIndex] = maxElem;
         printDoubleMass(mass);
     }
 
+    //print elements that more than their index in integer array
     void function5(){
         int size = 10;
         int[] mass = createRandomIntMass2(size);
-//        printIntMass(mass);
+        printIntMass(mass);
         for (int i = 0; i < mass.length; i++) {
             if(mass[i] > i){
                 System.out.print(mass[i] + " ");
@@ -123,6 +141,7 @@ class MyClass {
         }
     }
 
+    //count sum of elements with prime number indexes, double array
     void function6(){
         int size = 10;
         double[] mass = createRandomDoubleMass(size);
@@ -132,30 +151,37 @@ class MyClass {
         bigInteger = bigInteger.nextProbablePrime();
         int k = bigInteger.intValue();
         while (k <= mass.length){
+            System.out.printf("mass[%d]=%.2f ", k, mass[k]);
             sum += mass[k];
             bigInteger = bigInteger.nextProbablePrime();
             k = bigInteger.intValue();
         }
-        System.out.println("sum = " + sum);
+        System.out.println("\nsum = " + sum);
     }
 
+    //find max sum of center symmetric elements of double array
     void function7(){
-        int size = 5;
+        int size = 6;
         double[] mass = createRandomDoubleMass(size*2);
         printDoubleMass(mass);
         double max = mass[0] + mass[mass.length-1];
+        System.out.printf("%.2f  ", max);
         for (int i = 1; i < mass.length/2; i++) {
-            max = Double.max(max, mass[i] + mass[mass.length - 1 - i]);
+            double max2 = mass[i] + mass[mass.length - 1 - i];
+            System.out.printf("%.2f  ", max2);
+            max = Double.max(max, max2);
         }
-        System.out.println("max = " + max);
+        System.out.println("\nmax = " + max);
     }
 
+    //create new array from another array without its min elements
     void function8(){
         int size = 10;
-        int[] mass = createRandomIntMass(size);
+        int[] mass = createRandomIntMass2(size);
         printIntMass(mass);
         int min = findMin(mass);
         int count = countElem(mass, min);
+        System.out.println("min elem " + min + ", number if min elem " + count);
         int[] resMass = new int[mass.length - count];
         int i = 0;
         for (int elem: mass) {
@@ -166,16 +192,18 @@ class MyClass {
         printIntMass(resMass);
     }
 
+    //find minimal element in array
     private int findMin(int[] mass){
         int min = mass[0];
-        for (int i = 0; i < mass.length; i++) {
-            if (mass[i] < min) {
-                min = mass[i];
+        for (int value : mass) {
+            if (value < min) {
+                min = value;
             }
         }
         return min;
     }
 
+    //count number of elements in array
     private int countElem(int[] mass, int elem){
         int count = 0;
         for (int i: mass) {
@@ -186,8 +214,9 @@ class MyClass {
         return count;
     }
 
-    void function9(){
-        int size = 10;
+    //find mostly repeated number in array
+    //print minimal of them if there two or more founded
+    void function9(int size){
         int[] mass = createRandomIntMass2(size);
         printIntMass(mass);
         int elem = mass[0];
@@ -205,8 +234,8 @@ class MyClass {
         System.out.println("elem:" + elem + " times:" + count);
     }
 
-    void function10(){
-        int size = 4;
+    //squeeze array - delete every second element, free places set '0'
+    void function10(int size){
         int[] mass = createRandomIntMass2(size);
         printIntMass(mass);
         for (int i = 1; i < (int) Math.ceil(mass.length/2.); i++) {

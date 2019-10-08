@@ -2,6 +2,7 @@ package com.company;
 
 class MyClass4 {
 
+    //find greatest common factor
     void function1a(int a, int b){
         System.out.print("The greatest common divisor of " + a + " and " + b);
         int c = Math.max(a, b) % Math.min(a, b);
@@ -14,12 +15,14 @@ class MyClass4 {
         System.out.println(" is " + b);
     }
 
+    //find least common multiple
     void function1b(int a, int b){
         System.out.print("The least common multiple of " + a + " and " + b);
         int k = a * b / gcd(a,b);
         System.out.println(" is " + k);
     }
 
+    //greatest common factor
     private int gcd(int a, int b){
         if (a == b){
             return a;
@@ -40,16 +43,25 @@ class MyClass4 {
         }
     }
 
+    //find greatest common factor for four numbers
     void function2(int a, int b, int c, int d){
         System.out.print("for " + a + ", " + b + ", " + c + ", " + d);
         int res = gcd(gcd(a,b), gcd(c,d));
         System.out.print(" the greatest common divisor is " + res);
     }
 
+    //find the area of regular hexagon with side 'a', using triangle area formula
     void function3(int a){
-        System.out.println("The area of a regular hexagon is " + 6*a*a*Math.sqrt(3)/4);
+        double area = 6*equilateralTriangleArea(a);
+        System.out.println("The area of a regular hexagon is " + area);
     }
 
+    //triangle area formula
+    private double equilateralTriangleArea(int a){
+        return a*a*Math.sqrt(3)/4;
+    }
+
+    //number of dots 'n', find pair with the longest distance between
     void function4(){
         int[][] dots = new int[][]{{1,2},{3,4},{3,2},{4,1},{5,5},{5,5},{4,2},{2,2}};
         int index1 = 0;
@@ -70,10 +82,12 @@ class MyClass4 {
         + ") (" + dots[index2][0] + ", " + dots[index2][1] + ")");
     }
 
+    //distance between dots
     private double distance(int[] d1, int[] d2){
         return Math.sqrt(Math.pow(d1[0]-d2[0], 2) + Math.pow(d1[1] - d2[1], 2));
     }
 
+    //print second max number
     void function5(){
         int[] array1 = new int[]{2,5,1,7,6,3,4,-1,9};
         int max1 = Math.max(array1[0], array1[1]);
@@ -91,6 +105,7 @@ class MyClass4 {
         System.out.println("second max " + max2);
     }
 
+    //find if three numbers are relatively prime
     void function6(int a, int b, int c){
         int n1 = gcd(a, b);
         int n2 = gcd(a, c);
@@ -102,6 +117,7 @@ class MyClass4 {
         }
     }
 
+    //find sum of factorials of [1,9] odd numbers
     void function7a(){
         int res = 0;
         for (int i = 1; i < 10; i += 2) {
@@ -110,6 +126,7 @@ class MyClass4 {
         System.out.println(res);
     }
 
+    //factorial 'n'
     private int factorial(int n){
         int k = 1;
         for (int i = 1; i <= n; i++) {
@@ -118,6 +135,7 @@ class MyClass4 {
         return k;
     }
 
+    //find sum of factorials of [1,9] odd numbers
     void function7b(){
         int res = 0;
         int a = 1;
@@ -130,26 +148,41 @@ class MyClass4 {
         System.out.println(res);
     }
 
+    //find sum of three consistently positioned elements, inn range [a, b]
     void function8a(int a, int b){
         int[] array1 = new int[]{1,2,3,4,5,6,7,8,9};
+        printArray(array1);
         int sum = 0;
         for (int i = a-1; i < b-2; i++) {
             sum = sum + array1[i] + array1[i+1] + array1[i+2];
             System.out.print(sum + " ");
             sum = 0;
         }
+        System.out.println();
     }
 
+    //find sum of three consistently positioned elements, inn range [a, b]
     void function8b(int a, int b){
         int[] array1 = new int[]{1,2,3,4,5,6,7,8,9};
+        printArray(array1);
         int sum = array1[a-1] + array1[a] + array1[a+1];
         System.out.print(sum + " ");
         for (int i = a; i < b-2; i++) {
             sum = sum - array1[i-1] + array1[i+2];
             System.out.print(sum + " ");
         }
+        System.out.println();
     }
 
+    //print array
+    private void printArray(int[] arr){
+        for (int a: arr) {
+            System.out.print(a + " ");
+        }
+        System.out.println();
+    }
+
+    //quadrangle with sides 'x,y,z,t', find area, if right angle between 'x,y'
     void function9(int x, int y, int z, int t){
         double p = (x+y+z+t)/2.;
         double n1 = (p-x)*(p-y)*(p-z)*(p-t);
@@ -161,6 +194,7 @@ class MyClass4 {
         System.out.println("Area " + S1);
     }
 
+    //create array consists of digits of number 'n'
     void function10a(int n){
         System.out.println(n);
         int[] mass;
@@ -170,11 +204,10 @@ class MyClass4 {
             mass[i] = n%10;
             n /= 10;
         }
-        for (int value : mass) {
-            System.out.print(value + " ");
-        }
+        printArray(mass);
     }
 
+    //find array size
     private int countN(int n){
         int count = 1;
         while (Math.pow(10, count) <= n){
@@ -183,6 +216,7 @@ class MyClass4 {
         return count;
     }
 
+    //create array consists of digits of number 'n'
     void function10b(int n){
         System.out.println(n);
         char[] mass = String.valueOf(n).toCharArray();
@@ -191,6 +225,7 @@ class MyClass4 {
         }
     }
 
+    //find which number ('a', 'b') has more digits
     void function11(int a, int b){
         int n1 = countN(a);
         int n2 = countN(b);
@@ -203,11 +238,12 @@ class MyClass4 {
         }
     }
 
+    //create array, with numbers, sum of digits ='k', number <'n'
     void function12(int k, int n){
-        //int size = masSize(k, countN(n), n);
-        int[] a = new int[n/k];
+        int size = masSize(k, countN(n), n);
+        int[] a = new int[size];
         int index = 0;
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i <= n; i++) {
             if (countSum(i) == k) {
                 a[index++] = i;
             }
@@ -217,6 +253,7 @@ class MyClass4 {
         }
     }
 
+    //count sum of digits
     private int countSum(int n){
         int sum = 0;
         while (n != 0){
@@ -226,24 +263,22 @@ class MyClass4 {
         return sum;
     }
 
-    private int masSize(int k, int len, double max){
-        if(len == 1){
-            return k <= max ? 1 : 0;
-        } else {
+    //find size of result array
+    private int masSize(int k, int len, int max){
+        if (len > 1){
             int count = 0;
-            int q = 10;
-            if (k < q){
-                count += masSize(k, len-1, max);
-            }
-            int i = 1;
-            while (Math.pow(q, len-1)*i < max){
-                count += masSize(k-i, len-1, max-Math.pow(q, len-1)*i);
-                i++;
+            int p = (int) Math.pow(10, len-1);
+            for (int i = 0; i*p <= max && k-i >= 0; i++) {
+                int max3 = Math.min(max - i * p, p - 1);
+                count += masSize(k-i, len-1, max3);
             }
             return count;
+        } else {
+            return k <= max ? 1 : 0;
         }
     }
 
+    //find twin print in range [n, 2*n]
     void function13(int n){
         for (int i = n; i < 2*n-1; i++) {
             if (isPrime(i)){
@@ -254,6 +289,7 @@ class MyClass4 {
         }
     }
 
+    //check if prime
     private boolean isPrime(int n){
         for (int i = 2; i < n; i++) {
             if (n%i == 0){
@@ -263,6 +299,7 @@ class MyClass4 {
         return true;
     }
 
+    //find all Narcissistic numbers from '1' to 'k'
     void function14(int k){
         for (int i = 1; i < k+1; i++) {
             if(isArm(i)){
@@ -271,6 +308,7 @@ class MyClass4 {
         }
     }
 
+    //check for Narcissistic number
     private boolean isArm(int i){
         int n = countN(i);
         int sum = 0;
@@ -283,6 +321,7 @@ class MyClass4 {
         return i == sum;
     }
 
+    //find all 'n'-long numbers, digits of is increasing sequence
     void function15(int k){
         for (int i = (int)Math.pow(10, k-1); i < (int)Math.pow(10, k); i++) {
             if (isUp(i)){
@@ -291,6 +330,7 @@ class MyClass4 {
         }
     }
 
+    //check for increasing sequence
     private boolean isUp(int i){
         int k1 = i%10;
         i /= 10;
@@ -304,6 +344,8 @@ class MyClass4 {
         return true;
     }
 
+    //find sum of 'n'-long numbers, with only odd digits
+    //count even digits of sum
     void function16(int k){
         int sum = 0;
         for (int i = (int)Math.pow(10, k-1); i < (int)Math.pow(10, k); i++) {
@@ -315,6 +357,7 @@ class MyClass4 {
         System.out.println("sum " + sum + ", even " + count);
     }
 
+    //check for add digits
     private boolean isOdd(int k){
         while (k > 0){
             if(k%10 == 0) {
@@ -325,6 +368,7 @@ class MyClass4 {
         return true;
     }
 
+    //count even digits
     private int countEven(int k){
         int count = 0;
         while (k > 0){
@@ -336,6 +380,7 @@ class MyClass4 {
         return count;
     }
 
+    //how many times it's possible to subtract from number 'n' sum of its digits till 'n'=0
     void function17(int n){
         int count = 0;
         while (n != 0){
@@ -345,6 +390,7 @@ class MyClass4 {
         System.out.println("count " + count);
     }
 
+    //count sum of digits
     private int countDigit(int n){
         int sum = 0;
         while (n != 0){
@@ -353,4 +399,5 @@ class MyClass4 {
         }
         return sum;
     }
+
 }

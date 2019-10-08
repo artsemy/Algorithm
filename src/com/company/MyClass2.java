@@ -1,6 +1,5 @@
 package com.company;
 
-import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -9,6 +8,7 @@ class MyClass2 {
     private int[][] matrixInt;
     private double[][] matrixDouble;
 
+    //init matrix with params
     private void initMatrix(int xSize, int ySize, int minElem, int maxElem){
         matrixInt = new int[xSize][ySize];
         Random random = new Random();
@@ -19,6 +19,7 @@ class MyClass2 {
         }
     }
 
+    //init matrix with default params
     private void initDefaultMatrix(){
         int xSize = 5;
         int ySize = 5;
@@ -27,10 +28,11 @@ class MyClass2 {
         initMatrix(xSize, ySize, minElem, maxElem);
     }
 
+    //print matrix
     private void printIntMatrix(){
-        for (int i = 0; i < matrixInt.length; i++) {
-            for (int j = 0; j < matrixInt[0].length; j++) {
-                System.out.printf("%4d", matrixInt[i][j]);
+        for (int[] ints : matrixInt) {
+            for (int j : ints) {
+                System.out.printf("%4d", j);
             }
             System.out.println();
         }
@@ -40,10 +42,11 @@ class MyClass2 {
         System.out.println("----------------------");
     }
 
+    //print matrix
     private void printDoubleMatrix(){
-        for (int i = 0; i < matrixDouble.length; i++) {
-            for (int j = 0; j < matrixDouble[0].length; j++) {
-                System.out.printf("%7.2f", matrixDouble[i][j]);
+        for (double[] doubles : matrixDouble) {
+            for (double j : doubles) {
+                System.out.printf("%7.2f", j);
             }
             System.out.println();
         }
@@ -53,6 +56,8 @@ class MyClass2 {
         System.out.println("----------------------");
     }
 
+    //print odd columns where first element more than last
+    //count from '1'
     void function1(){
         initDefaultMatrix();
         printIntMatrix();
@@ -63,13 +68,15 @@ class MyClass2 {
         }
     }
 
+    //print column 'j'
     private void printColumn(int j){
-        for (int i = 0; i < matrixInt.length; i++) {
-            System.out.printf("%4d", matrixInt[i][j]);
+        for (int[] ints : matrixInt) {
+            System.out.printf("%4d", ints[j]);
         }
         System.out.println();
     }
 
+    //print line 'i'
     private void printLine(int i){
         for (int j = 0; j < matrixInt[0].length; j++) {
             System.out.printf("%4d", matrixInt[i][j]);
@@ -77,25 +84,26 @@ class MyClass2 {
         System.out.println();
     }
 
+    //print diagonal elements
     void function2(){
         initDefaultMatrix();
         printIntMatrix();
         for (int i = 0; i < matrixInt.length; i++) {
-            System.out.print(matrixInt[i][i] + " ");
+            System.out.printf("%4d", matrixInt[i][i]);
         }
+        System.out.println();
     }
 
-    void function3(){
+    //print 'k' line and 'p' column; count from '1'
+    void function3(int k, int p){
         initDefaultMatrix();
         printIntMatrix();
-        int kLine = 3;
-        int pColumn = 4;
-        printLine(kLine - 1);
-        printColumn(pColumn - 1);
+        printLine(k - 1);
+        printColumn(p - 1);
     }
 
-    void function4(){
-        int n = 6;
+    //form matrix with lines [1 ... n] and [n ... 1]; n even
+    void function4(int n){
         matrixInt = new int[n][n];
         int[] line1 = new int[n];
         int[] line2 = new int[n];
@@ -110,8 +118,8 @@ class MyClass2 {
         printIntMatrix();
     }
 
-    void function5(){
-        int n = 6;
+    //form matrix [1 1 ... 1 1] [2 2 ... 2 0] [3 3 ... 0 0] ... [n 0 ... 0 0]; n even
+    void function5(int n){
         matrixInt = new int[n][n];
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n - i; j++) {
@@ -121,8 +129,8 @@ class MyClass2 {
         printIntMatrix();
     }
 
-    void function6(){
-        int n = 4;
+    //form matrix [1 1 ... 1 1] [0 1 ... 1 0] ... [0 1 ... 1 0] [1 1 ... 1 1]; n even
+    void function6(int n){
         matrixInt = new int[n][n];
         for (int i = 0; i < n; i++) {
             for (int j = i; j < n - i; j++) {
@@ -133,8 +141,8 @@ class MyClass2 {
         printIntMatrix();
     }
 
-    void function7(){
-        int n = 5;
+    //form matrix 'n' a[i, j] = sin((i^2-j^2)/n); count positive elements
+    void function7(int n){
         int count = 0;
         matrixDouble = new double[n][n];
         for (int i = 0; i < n; i++) {
@@ -149,13 +157,14 @@ class MyClass2 {
         System.out.println("poz: " + count);
     }
 
+    //replace two columns, numbers inserted; count from 1
     void function8(){
         initDefaultMatrix();
         printIntMatrix();
         Scanner scanner = new Scanner(System.in);
-        System.out.println("insert number1: ");
+        System.out.println("insert number1, [1,5]: ");
         int column1 = scanner.nextInt();
-        System.out.println("insert number2: ");
+        System.out.println("insert number2, [1,5]: ");
         int column2 = scanner.nextInt();
         for (int i = 0; i < matrixInt.length; i++) {
             int elem = matrixInt[i][column1-1];
@@ -163,21 +172,22 @@ class MyClass2 {
             matrixInt[i][column2-1] = elem;
         }
         printIntMatrix();
-        scanner.close();
+//        scanner.close();
     }
 
+    //count column sum, find max sum
     void function9(){
-        initDefaultMatrix();
+        initMatrix(5, 5, 0, 9);
         printIntMatrix();
         int max = -1;
         int sum;
         int number = -1;
         for (int j = 0; j < matrixInt[0].length; j++) {
             sum = 0;
-            for (int i = 0; i < matrixInt.length; i++) {
-                sum += matrixInt[i][j];
+            for (int[] ints : matrixInt) {
+                sum += ints[j];
             }
-            System.out.print("  " + sum);
+            System.out.printf("%4d", sum);
             if(sum > max){
                 max = sum;
                 number = j;
@@ -186,18 +196,20 @@ class MyClass2 {
         System.out.println("\ncolumn " + (number+1));
     }
 
+    //find positive elements of main diagonal
     void function10(){
         initDefaultMatrix();
         printIntMatrix();
         for (int i = 0; i < matrixInt.length; i++) {
             if(matrixInt[i][i] > 0){
-                System.out.print("  " + matrixInt[i][i]);
+                System.out.printf("%4d", matrixInt[i][i]);
             }
         }
     }
 
+    //matrix 10x20, print matrix and line number, where more than three elements-'5'
     void function11(){
-        initDefaultMatrix();
+        initMatrix(10, 20, 0, 15);
         printIntMatrix();
         int five = 5;
         int count;
@@ -214,16 +226,18 @@ class MyClass2 {
         }
     }
 
+    //sort line, increase and decrease elements
     void function12(){
         initDefaultMatrix();
         superFunction(false);
     }
 
+    //sort and print elements, b-false in lines, b-true in columns
     private void superFunction(boolean b){
         printIntMatrix();
         if(b){ transpose(); }
-        for (int[] ints : matrixInt) {
-            Arrays.sort(ints);
+        for (int i = 0; i < matrixInt.length; ++i) {
+            matrixInt[i] = sort(matrixInt[i]);
         }
         if(b){ transpose(); }
         printIntMatrix();
@@ -233,8 +247,8 @@ class MyClass2 {
             }
         }
         if(b){ transpose(); }
-        for (int[] ints : matrixInt) {
-            Arrays.sort(ints);
+        for (int i = 0; i < matrixInt.length; ++i) {
+            matrixInt[i] = sort(matrixInt[i]);
         }
         if(b){ transpose(); }
         for (int i = 0; i < matrixInt.length; i++) {
@@ -245,6 +259,21 @@ class MyClass2 {
         printIntMatrix();
     }
 
+    //sort increase
+    private int[] sort(int[] ints){
+        for (int i = 0; i < ints.length; i++) {
+            for (int j = i+1; j < ints.length; j++) {
+                if (ints[i] > ints[j]){
+                    int k = ints[i];
+                    ints[i] = ints[j];
+                    ints[j] = k;
+                }
+            }
+        }
+        return ints;
+    }
+
+    //transpose matrix
     private void transpose(){
         int[][] mass2 = new int[matrixInt.length][matrixInt[0].length];
         for(int i = 0; i < mass2.length; ++i){
@@ -255,14 +284,14 @@ class MyClass2 {
         matrixInt = mass2;
     }
 
+    //sort columns, increase and decrease elements
     void function13(){
         initDefaultMatrix();
         superFunction(true);
     }
 
-    void function14(){
-        int m = 7;
-        int n = 5;
+    //form m*n [0,1] matrix, 'n'-column has n-'1'
+    void function14(int m, int n){
         matrixInt = new int[m][n];
         Random r = new Random();
         for (int i = 0; i < n; i++){
@@ -278,13 +307,14 @@ class MyClass2 {
         printIntMatrix();
     }
 
+    //find max elem, replace all odd elements with max
     void function15(){
         initDefaultMatrix();
         printIntMatrix();
         int max = findMaxElement();
         for(int i = 0; i < matrixInt.length; i++){
             for(int j = 0; j < matrixInt[0].length; j++){
-                if((i+j)%2 == 0) {
+                if(matrixInt[i][j]%2 != 0) {
                     matrixInt[i][j] = max;
                 }
             }
@@ -292,21 +322,74 @@ class MyClass2 {
         printIntMatrix();
     }
 
+    //find max element in matrix
     private int findMaxElement(){
         int max = matrixInt[0][0];
-        for(int i = 0; i < matrixInt.length; i++){
-            for(int j = 0; j < matrixInt[0].length; j++){
-                if(matrixInt[i][j] > max){
-                    max = matrixInt[i][j];
+        for (int[] ints : matrixInt) {
+            for (int i : ints) {
+                if (i > max) {
+                    max = i;
                 }
             }
         }
         return max;
     }
 
-    void function16(){
-        int n = 3;
+    //form magic square
+    void function16(int n){
         int sum = (1+n*n)*n/2;
-
+        matrixInt = new int[n][n];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                matrixInt[i][j] = i + j + (n-1)*i + 1;
+            }
+        }
+        printIntMatrix();
+        while (!checkMagick(sum)){
+            replace(n);
+        }
+        printIntMatrix();
     }
+
+    //replace elements
+    private void replace(int n){
+        Random r = new Random();
+        int x1 = r.nextInt(n);
+        int y1 = r.nextInt(n);
+        int x2 = r.nextInt(n);
+        int y2 = r.nextInt(n);
+        int k = matrixInt[x1][y1];
+        matrixInt[x1][y1] = matrixInt[x2][y2];
+        matrixInt[x2][y2] = k;
+    }
+
+    //check for magic
+    private boolean checkMagick(int l){
+        for (int i = 0; i < matrixInt[0].length; i++) {
+            int sum = 0;
+            for (int[] ints : matrixInt) {
+                sum += ints[i];
+            }
+            if (sum != l){
+                return false;
+            }
+        }
+        for (int[] ints: matrixInt) {
+            int sum = 0;
+            for (int j: ints) {
+                sum += j;
+            }
+            if (sum != l){
+                return false;
+            }
+        }
+        int s1 = 0;
+        int s2 = 0;
+        for (int i = 0; i < matrixInt.length; i++) {
+            s1 += matrixInt[i][i];
+            s2 += matrixInt[i][matrixInt.length-1-i];
+        }
+        return s1 == l && s2 == l;
+    }
+
 }
